@@ -1,12 +1,12 @@
-import {useContext, useState} from "react";
-import {set, useForm} from "react-hook-form";
-import { AuthContext} from "../context/AuthContext.jsx";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
     const [mode, setMode] = useState("signup")
     const [error, setError] = useState(null);
-    const { signUp, login } = useContext(AuthContext)
+    const { signUp, login } = useAuth();
     const navigate = useNavigate();
     const {
         register,
@@ -67,7 +67,6 @@ export default function Auth() {
                             id={"password"}
                             />
                             {errors.password && <span className={"form-error"}>(errors.password.messages)</span>}
-
                         </div>
                         <button type="submit" className={"btn btn-primary btn-large"}>
                             {mode === "signup" ? "Sign Up" : "Login"}
